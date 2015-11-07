@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.Scanner;
 
 public class AgendaOfNames {
-
+    private int index = 0;
     String[] nameAgenda = new String[50];
 
 
@@ -90,21 +90,62 @@ public class AgendaOfNames {
 
 
     private void daBunaZiua() {
+
         System.out.println("buna ziua");
     }
 
     private void createItem() {
-
+        String val = readName();
+        if (index < nameAgenda.length) {
+            nameAgenda[index] = val;
+            index++;
+        } else {
+            System.out.println("debug : try to find slots");
+            for (int i = 0; i < nameAgenda.length; i++){
+                if (nameAgenda[i] == null){
+                    nameAgenda[i] = val;
+                    System.out.println("debug: slot found, inserted ok");
+                    break;
+                }
+            }
+        }
     }
-
 
     private void updateItem() {
         //search and if found do an update
+        String oldName = readName();
+        boolean bol = false;
+        for(int i = 0; i<nameAgenda.length; i++){
+            if (nameAgenda[i] != null){
+                if (nameAgenda[i].equals(oldName)){
+                    System.out.println("Numele gasit e pe pozitia: " + i);
+                    nameAgenda[i] = readName();
+                    bol = true;
+                }
+            }
+        }
+        if(bol==false){
+            System.out.println("Nu am gasit numele in lista");
+        }
 
     }
 
 
     private void deleteItem() {
+        String oldName = readName();
+        boolean bol = false;
+        for(int i = 0; i<nameAgenda.length; i++){
+            if (nameAgenda[i] != null){
+                if (nameAgenda[i].equals(oldName)){
+                    System.out.println("Numele gasit e pe pozitia: " + i);
+                    nameAgenda[i] = null;
+                    bol = true;
+                }
+            }
+        }
+        if(!bol){
+            System.out.println("Nu am gasit numele in lista");
+        }
 
     }
 
